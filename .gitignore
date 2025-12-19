@@ -1,0 +1,17 @@
+# Security: NEVER upload API keys
+.env
+backend/.env
+
+# Python & System junk
+__pycache__/
+*.pyc
+venv/
+.DS_Store
+
+# Large Media & Output Files
+backend/audio/
+backend/uploads/
+backend/outputs/
+
+# Docker
+.docker/

@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: video-summary-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/audio:/app/audio
+      - ./backend/outputs:/app/outputs
+    restart: unless-stopped
