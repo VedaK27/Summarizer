@@ -3,12 +3,20 @@ from app.utils import extract_audio, transcribe_audio
 from app.processor import TextNotesProcessor
 import os
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Load environment variables (API Keys)
 load_dotenv() 
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"], # Allow your React app
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Initialize the Groq/Pegasus Processor
 # Ensure GROQ_API_KEY is in your .env file
 groq_api_key = os.getenv("GROQ_API_KEY")

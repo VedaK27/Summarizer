@@ -15,3 +15,5 @@ backend/outputs/
 
 # Docker
 .docker/
+
+frontend/node_modules/

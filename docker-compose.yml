@@ -13,3 +13,12 @@ services:
       - ./backend/audio:/app/audio
       - ./backend/outputs:/app/outputs
     restart: unless-stopped
+
+  frontend:
+    build: ./frontend  # Path to your frontend folder
+    container_name: lazy-watch-frontend
+    ports:
+      - "3000:80"      # Map your computer's 3000 to Container's 80
+    restart: unless-stopped
+    depends_on:
+      - backend
