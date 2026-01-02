@@ -1,0 +1,369 @@
+/* IntroScreen.css */
+
+.intro-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background decorations */
+.bg-decoration {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  filter: blur(80px);
+  animation: float 20s ease-in-out infinite;
+}
+
+.bg-decoration-1 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #1e293b, #1e293b);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.bg-decoration-2 {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 5s;
+}
+
+.bg-decoration-3 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #1e293b, #1e293b);
+  top: 50%;
+  right: 10%;
+  animation-delay: 10s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.9);
+  }
+}
+
+.intro-content {
+  max-width: 900px;
+  position: relative;
+  z-index: 10;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo Section */
+.logo-section {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #1e293b 0%, #1e293b 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(200, 155, 79, 0.25);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(200, 155, 79, 0.25);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(200, 155, 79, 0.35);
+  }
+}
+
+.logo-icon svg {
+  width: 36px;
+  height: 36px;
+  color: white;
+}
+
+.logo-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1e293b 0%, #1e293b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.logo-subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Text Container */
+.text-container {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 40px;
+  margin-bottom: 35px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: fadeIn 1s ease-out 0.3s backwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.intro-text {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: #475569;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.intro-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Summary Box */
+.summary-box {
+  background: linear-gradient(135deg, #fffbf0 0%, #fff9e6 100%);
+  border: 2px solid #1e293b;
+  border-radius: 20px;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 40px rgba(200, 155, 79, 0.15);
+  animation: fadeInScale 0.8s ease-out 0.6s backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.summary-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.summary-icon {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  background: linear-gradient(135deg, #1e293b 0%, #1e293b 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(200, 155, 79, 0.3);
+}
+
+.summary-icon svg {
+  width: 26px;
+  height: 26px;
+  color: white;
+}
+
+.intro-summary {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.5;
+  margin: 0;
+  position: relative;
+}
+
+/* Features Pills */
+.features-pills {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 35px;
+  flex-wrap: wrap;
+  animation: fadeIn 1s ease-out 0.8s backwards;
+}
+
+.pill {
+  padding: 10px 24px;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.pill:hover {
+  border-color: #1e293b;
+  background: linear-gradient(135deg, #fffbf0 0%, #fff9e6 100%);
+  color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 155, 79, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .intro-container {
+    padding: 40px 20px;
+  }
+
+  .logo-title {
+    font-size: 2.2rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .logo-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .text-container {
+    padding: 30px 24px;
+    border-radius: 20px;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .summary-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+    gap: 16px;
+  }
+
+  .intro-summary {
+    font-size: 1.15rem;
+  }
+
+  .features-pills {
+    gap: 10px;
+  }
+
+  .pill {
+    font-size: 0.85rem;
+    padding: 8px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-title {
+    font-size: 1.9rem;
+  }
+
+  .text-container {
+    padding: 24px 20px;
+  }
+
+  .intro-text {
+    font-size: 0.95rem;
+  }
+
+  .summary-box {
+    padding: 24px 20px;
+  }
+
+  .intro-summary {
+    font-size: 1.05rem;
+  }
+
+  .summary-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+  }
+
+  .summary-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}

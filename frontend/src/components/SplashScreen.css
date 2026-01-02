@@ -1,0 +1,36 @@
+.splash {
+  height: 100vh;
+  background: white;          /* white background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeOut 2.5s ease-in-out forwards;
+  animation-delay: 1.5s;      /* time splash stays visible */
+}
+
+.splash img {
+  width: 420px;
+  margin-bottom: 35px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Fade-in effect for logo */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Fade-to-clear effect */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
