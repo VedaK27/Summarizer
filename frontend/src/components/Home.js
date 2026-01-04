@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import "./Home.css";
 import logo from "../assets/logo.png";
-import apiService from "../services/apiservice";
+import Mermaid from "./Mermaid";
+import apiService from "../services/apiService";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("upload");
@@ -49,15 +50,26 @@ const handleProcess = async () => {
 
   setIsProcessing(true);
   try {
-    // Calling the service instead of writing fetch here
     console.log("Sending file to backend for summarization...");
     const data = await apiService.summarizeVideo(selectedFile);
 
-    // Update state with backend data
+    // 1. Extract Summary
+    const summaryText = data.summary?.overall_summary || "No summary generated";
+
+    // 2. Extract Key Points
+    const extractedKeyPoints = data.summary?.segments 
+      ? data.summary.segments.flatMap(segment => segment.key_points || []) 
+      : [];
+
+    // 3. Extract Topic (New Step)
+    const extractedTopic = data.summary?.segments?.[0]?.topic || "";
+
+    // Update state with EVERYTHING (including the new topic)
     setResults({
-      summary: data.summary.final_summary || "No summary generated",
-      keyPoints: data.summary.key_points || [],
-      mindmapFile: data.mindmap_file
+      summary: summaryText,
+      keyPoints: extractedKeyPoints,
+      mindmapFile: data.mindmap_file,
+      topic: extractedTopic // <--- We save it here!
     });
 
     setActiveTab("results");
@@ -259,8 +271,24 @@ const handleProcess = async () => {
           <div className="results-container">
             <div className="card">
               <h3 className="card-title">Summary</h3>
+              
+              {/* Use results.topic here (NOT data) */}
+              {results.topic && (
+                 <h4 style={{marginBottom: '10px', color: '#666'}}>
+                   Topic: {results.topic}
+                 </h4>
+              )}
+
               <p className="summary-text">{results.summary}</p>
             </div>
+            {results.mindmapCode && (
+              <div className="card">
+                <h3 className="card-title">Mindmap</h3>
+                <div className="mindmap-wrapper" style={{ padding: "20px", background: "#fff", borderRadius: "8px" }}>
+                  <Mermaid chart={results.mindmapCode} />
+                </div>
+              </div>
+            )}
 
             <div className="card">
               <h3 className="card-title">Key Points</h3>
