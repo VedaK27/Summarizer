@@ -37,7 +37,7 @@ const apiService = {
   searchKeywords: async (keyword) => {
     try {
       const response = await fetch(
-        `${API_BASE_URL}/search?q=${encodeURIComponent(keyword)}`
+        `${API_BASE_URL}/keyword_summarize?q=${encodeURIComponent(keyword)}`
       );
 
       if (!response.ok) {

@@ -189,6 +189,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -234,6 +235,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -272,6 +274,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -509,6 +512,29 @@
   .process-button,
   .search-button {
     padding: 14px 24px;
-    font-size: 0.95rem;
   }
+}
+
+/* Mermaid Mindmap */
+.mindmap-wrapper {
+  margin-top: 16px;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.mermaid-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.mermaid-container svg {
+  height: auto;
+  max-width: 100%;
 }

@@ -11,6 +11,8 @@ export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [results, setResults] = useState([]);
+  const [searchData, setSearchData] = useState(null); // Add state for keyword search results
+  const [isSearching, setIsSearching] = useState(false); // Add searching state
   const fileInputRef = useRef(null);
 
 
@@ -69,6 +71,7 @@ const handleProcess = async () => {
       summary: summaryText,
       keyPoints: extractedKeyPoints,
       mindmapFile: data.mindmap_file,
+      mindmapCode: data.mindmap_code, // Add this line
       topic: extractedTopic // <--- We save it here!
     });
 
@@ -80,17 +83,21 @@ const handleProcess = async () => {
   }
 };
 
- const handleSearch = async () => {
-  if (!searchKeyword.trim()) return;
-  
-  try {
-    const searchData = await apiService.searchKeywords(searchKeyword);
-    console.log("Search Results:", searchData);
-    // Handle displaying search results here
-  } catch (error) {
-    console.error("Search failed:", error.message);
-  }
-};
+  const handleSearch = async () => {
+    if (!searchKeyword.trim()) return;
+    
+    setIsSearching(true);
+    try {
+      const data = await apiService.searchKeywords(searchKeyword);
+      console.log("Search Results:", data);
+      setSearchData(data); // Save the results
+    } catch (error) {
+      console.error("Search failed:", error.message);
+      alert(`Search failed: ${error.message}`);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   return (
     <div className="home-container">
@@ -332,13 +339,50 @@ const handleProcess = async () => {
                   placeholder="Enter keywords to search..."
                   value={searchKeyword}
                   onChange={(e) => setSearchKeyword(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                   className="search-input"
                 />
               </div>
-              <button onClick={handleSearch} className="search-button">
-                Search
+              <button 
+                onClick={handleSearch} 
+                className="search-button"
+                disabled={isSearching}
+              >
+                {isSearching ? "Searching..." : "Search"}
               </button>
             </div>
+
+            {searchData && (
+              <div className="search-results" style={{ marginTop: "30px" }}>
+                {searchData.error ? (
+                  <div className="card" style={{ border: "1px solid #fee2e2", background: "#fef2f2" }}>
+                    <p style={{ color: "#dc2626", margin: 0 }}>{searchData.error}</p>
+                  </div>
+                ) : (
+                  <div className="card" style={{ border: "1px solid #e2e8f0" }}>
+                    <h4 style={{ color: "#1e293b", marginBottom: "12px", borderBottom: "1px solid #f1f5f9", paddingBottom: "8px" }}>
+                      Results for: "{searchData.topic || searchKeyword}"
+                    </h4>
+                    <p className="summary-text" style={{ fontSize: "0.95rem", color: "#475569" }}>
+                      {searchData.summary}
+                    </p>
+                    {searchData.key_points && searchData.key_points.length > 0 && (
+                      <div style={{ marginTop: "20px" }}>
+                        <h5 style={{ fontSize: "0.9rem", color: "#1e293b", marginBottom: "10px" }}>Key Points:</h5>
+                        <ul className="key-points-list">
+                          {searchData.key_points.map((point, index) => (
+                            <li key={index} className="key-point-item" style={{ padding: "8px 0", fontSize: "0.9rem" }}>
+                              <span className="key-point-bullet">•</span>
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="search-hint">
               <p className="hint-text">

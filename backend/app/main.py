@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from app.utils import extract_audio, transcribe_audio
 from app.processor import TextNotesProcessor
+from app.summarizer_logic import keyword_summarize
 import os
 from dotenv import load_dotenv
 
@@ -75,6 +76,13 @@ async def summarize_video(video: UploadFile = File(...)):
                 mindmap_code = f.read()
         # ------------------------------
 
+        # Save transcribed text for future keyword searches
+        try:
+            with open("outputs/last_transcription.txt", "w", encoding="utf-8") as f:
+                f.write(transcribed_text)
+        except Exception as e:
+            print(f"Failed to save transcription: {e}")
+
         return {
             "status": "success",
             "summary": summary_result,
@@ -85,4 +93,21 @@ async def summarize_video(video: UploadFile = File(...)):
 
     except Exception as e:
         print(f"Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/keyword_summarize")
+def keyword_summarize_endpoint(q: str):
+    """Handles targeted keyword search within the last processed video."""
+    transcription_path = "outputs/last_transcription.txt"
+    
+    if not os.path.exists(transcription_path):
+        raise HTTPException(status_code=400, detail="No video has been processed yet.")
+
+    try:
+        with open(transcription_path, "r", encoding="utf-8") as f:
+            text = f.read()
+        
+        # We pass the global groq_api_key
+        return keyword_summarize(text=text, keyword=q, api_key=groq_api_key)
+    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
