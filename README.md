@@ -1,20 +1,20 @@
-# 🎥 AI Video Summarizer & Mindmap Generator
+# 🎥 AI Lecture(Video) Summarizer & Mindmap Generator
 
 An intelligent application that takes video input, transcribes the audio, and generates structured summaries and visual mindmaps using advanced AI models.
 
-## 🚀 Features
+## Features
 * **Transcription:** OpenAI Whisper (running locally).
 * **Summarization:** Google Pegasus (Abstractive summarization).
 * **Intelligence:** Groq Llama 3 (Entity extraction & Logic).
 * **Visualization:** Automated Mermaid.js Mindmaps.
 * **Containerization:** Fully Dockerized setup.
 
-## 🛠️ Tech Stack
+## Tech Stack
 * **Backend:** FastAPI (Python)
 * **AI Models:** Whisper, Pegasus-XSUM, SentenceTransformers
 * **Infrastructure:** Docker & Docker Compose
 
-## ⚡ How to Run
+## How to Run
 1.  Clone the repository.
 2.  Create a `.env` file in `backend/` with your API key:
     ```
@@ -28,3 +28,7 @@ An intelligent application that takes video input, transcribes the audio, and ge
 
 ## ⚠️ Note on Performance
 The first build downloads ~3GB of AI models (Pegasus & Whisper). Subsequent starts are instant.
+
+
+##Live Demo Link : 
+*
