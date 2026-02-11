@@ -43,4 +43,4 @@ The entire system is containerized using Docker for consistent deployment across
 
 
 ##Live Demo Link : 
-*https://drive.google.com/file/d/1iPvZAOjkwKe7nG41fRxk0HdRTTYk52Fe/view?usp=sharing
+* https://drive.google.com/file/d/1iPvZAOjkwKe7nG41fRxk0HdRTTYk52Fe/view?usp=sharing
