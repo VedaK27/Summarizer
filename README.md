@@ -24,9 +24,9 @@ The entire system is containerized using Docker for consistent deployment across
 * **Infrastructure:** Docker & Docker Compose
 
 ## Advantages
-*Groq is free for students providing better accuracy and extraction compared to the other model given the cost.
-*The system runs locally and is fully containerized, ensuring data privacy and eliminating dependency on external cloud services.
-*The modular pipeline architecture allows easy upgrades and maintenance without affecting the entire system.
+* Groq is free for students providing better accuracy and extraction compared to the other model given the cost.
+* The system runs locally and is fully containerized, ensuring data privacy and eliminating dependency on external cloud services.
+* The modular pipeline architecture allows easy upgrades and maintenance without affecting the entire system.
 
 ## How to Run
 1.  Clone the repository.
